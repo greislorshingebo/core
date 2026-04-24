@@ -27,6 +27,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     try:
         await coordinator.async_config_entry_first_refresh()
     except Exception as err:
+        # Log the error before raising so it's easier to debug connection issues
+        _LOGGER.error("Failed to connect to device during setup: %s", err)
         raise ConfigEntryNotReady(
             f"Failed to connect to device: {err}"
         ) from err
