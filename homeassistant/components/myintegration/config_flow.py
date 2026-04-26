@@ -38,7 +38,9 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     # )
 
     # Return info that you want to store in the config entry.
-    return {"title": f"{data[CONF_HOST]}:{data[CONF_PORT]}"}
+    # Using username in the title makes it easier to identify entries when
+    # multiple accounts on the same host are configured.
+    return {"title": f"{data[CONF_USERNAME]}@{data[CONF_HOST]}:{data[CONF_PORT]}"}
 
 
 class MyIntegrationConfigFlow(ConfigFlow, domain=DOMAIN):
