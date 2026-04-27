@@ -52,10 +52,12 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         # Clean up the top-level domain key if no entries remain
         if not hass.data[DOMAIN]:
             hass.data.pop(DOMAIN)
+        _LOGGER.debug("Successfully unloaded My Integration entry: %s", entry.entry_id)
 
     return unload_ok
 
 
 async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
     """Reload config entry when options change."""
+    _LOGGER.debug("Reloading My Integration entry due to options change: %s", entry.entry_id)
     await hass.config_entries.async_reload(entry.entry_id)
